@@ -8,7 +8,6 @@ from schemas import (
     PlainShipSchema,
     ShipCreateSchema,
     ShipUpdateStatusSchema,
-    ShipLinkServiceSchema,
 )
 from services.port_service import (
     get_all_ships,
@@ -125,23 +124,19 @@ class ShipStatusUpdate(MethodView):
             return response
 
 
-
-
-
 @blp.route("/<int:ship_id>/service/<int:service_id>")
 class ShipServiceLink(MethodView):
-    @blp.arguments(ShipLinkServiceSchema)
     @blp.response(200, PlainShipSchema, description="Ship linked to service successfully")
     @blp.response(404, description="Ship or service not found")
     def post(self, ship_id, service_id):
         try:
+            # Link the ship to the service using the ship_id and service_id
             ship = link_ship_to_service(ship_id, service_id)
             if ship:
-                return ship
-            response = jsonify({"error": "Ship or service not found"})
-            response.status_code = 404
-            return response
+                return {
+                    "message": f"Ship {ship_id} linked to service {service_id} successfully ",
+                    "ship": PlainShipSchema().dump(ship)
+                }, 200
+            return {"message": "Ship or service not found"}, 404
         except Exception as e:
-            response = jsonify({"error": f"An unexpected error occurred: {str(e)}"})
-            response.status_code = 500
-            return response
+            return {"error": f"An unexpected error occurred: {str(e)}"}, 500

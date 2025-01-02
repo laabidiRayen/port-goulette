@@ -1,6 +1,6 @@
 from datetime import datetime
 from extensions import db
-
+from .relationships import ship_service_association
 class Ship(db.Model):
     __tablename__ = 'ships'
 
@@ -11,5 +11,5 @@ class Ship(db.Model):
     departure_time = db.Column(db.DateTime)
     status = db.Column(db.String(50), nullable=False, default="arrived")  # status field (e.g., "arrived", "departed", "docked")
 
-    def __repr__(self):
-        return f"<Ship {self.name}>"
+    # Many-to-Many Relationship with Service
+    services = db.relationship('Service', secondary=ship_service_association, back_populates='ships')

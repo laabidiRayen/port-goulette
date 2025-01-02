@@ -1,28 +1,31 @@
-# services/feedback_service.py
 
-from models.feedback import Feedback
 from extensions import db
+from models.feedback import Feedback
 
-# Add feedback for a service or ship
-def add_feedback(user_id, service_id, feedback_text):
-    feedback = Feedback(user_id=user_id, service_id=service_id, feedback_text=feedback_text)
-    db.session.add(feedback)
-    db.session.commit()
-    return feedback
-
-# Get all feedback for a service or ship
 def get_all_feedback():
-    return Feedback.query.all()
+    try:
+        return Feedback.query.all()
+    except Exception as e:
+        raise RuntimeError(f"Failed to retrieve feedbacks: {str(e)}")
 
-# Get feedback for a specific service
-def get_feedback_for_service(service_id):
-    return Feedback.query.filter_by(service_id=service_id).all()
+def add_feedback(user_id, message, rating=None):
+    try:
+        feedback = Feedback(user_id=user_id, message=message, rating=rating)
+        db.session.add(feedback)
+        db.session.commit()
+        return feedback
+    except Exception as e:
+        db.session.rollback()
+        raise RuntimeError(f"Failed to add feedback: {str(e)}")
 
-# Delete feedback
-def delete_feedback(id):
-    feedback = Feedback.query.get(id)
-    if feedback:
+def delete_feedback(feedback_id):
+    try:
+        feedback = Feedback.query.get(feedback_id)
+        if not feedback:
+            return False
         db.session.delete(feedback)
         db.session.commit()
-        return {'message': 'Feedback deleted successfully'}
-    return {'error': 'Feedback not found'}, 404
+        return True
+    except Exception as e:
+        db.session.rollback()
+        raise RuntimeError(f"Failed to delete feedback: {str(e)}")

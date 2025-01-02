@@ -1,23 +1,4 @@
-# from extensions import db
-# from models.service import Service
 
-# # Get all services
-# def get_all_services():
-#     try:
-#         services = Service.query.all()
-#         return [service.to_dict() for service in services]
-#     except Exception as e:
-#         return {"error": str(e)}
-
-# # Get a specific service by ID
-# def get_service_by_id(service_id):
-#     try:
-#         service = Service.query.get(service_id)
-#         if service:
-#             return service.to_dict()
-#         return None
-#     except Exception as e:
-#         return {"error": str(e)}
 from extensions import db
 from models.service import Service
 

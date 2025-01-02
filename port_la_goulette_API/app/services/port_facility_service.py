@@ -11,20 +11,20 @@ def get_all_port_facilities():
 def get_port_facility_by_id(id):
     return PortFacility.query.get(id)
 
-# Add a new port facility (e.g., new parking spot)
-def add_port_facility(name, type, capacity):
-    facility = PortFacility(name=name, type=type, capacity=capacity)
+# Add a new port facility
+def add_port_facility(name, description, operational_hours):
+    facility = PortFacility(name=name, description=description, operational_hours=operational_hours)
     db.session.add(facility)
     db.session.commit()
     return facility
 
-# Update a port facility (e.g., parking spot capacity)
-def update_port_facility(id, name, type, capacity):
+# Update a port facility
+def update_port_facility(id, name, description, operational_hours):
     facility = PortFacility.query.get(id)
     if facility:
         facility.name = name
-        facility.type = type
-        facility.capacity = capacity
+        facility.description = description
+        facility.operational_hours = operational_hours
         db.session.commit()
         return facility
     return None

@@ -1,28 +1,5 @@
-# ressources/service.py
-
-# from flask_smorest import Blueprint
-# from flask.views import MethodView
-# from services.db_service import get_all_services, get_service_by_id
-
-# blp = Blueprint("Services", "services", url_prefix="/services", description="Operations related to services")
-
-# @blp.route("/")
-# class ServiceList(MethodView):
-#     @blp.response(200, description="List of all services")
-#     def get(self):
-#         services = get_all_services()
-#         return services
-
-
-# @blp.route("/<int:service_id>")
-# class ServiceDetail(MethodView):
-#     @blp.response(200, description="Details of a specific service")
-#     @blp.response(404, description="Service not found")
-#     def get(self, service_id):
-#         service = get_service_by_id(service_id)
-#         if service:
-#             return service
-#         return {"message": "Service not found"}, 404
+# from services.db_service import get_all_services, get_service_by_id, create_service, update_service
+# from schemas import PlainServiceSchema, ServiceCreateSchema, ServiceUpdateSchema
 
 from flask_smorest import Blueprint
 from flask.views import MethodView

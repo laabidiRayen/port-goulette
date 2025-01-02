@@ -2,68 +2,67 @@
 
 from flask_smorest import Blueprint
 from flask.views import MethodView
-from flask import request
+from flask import request, jsonify
+from schemas import BookingSchema  # Assuming you have a schema for Booking
 from services.booking_service import (
     create_booking,
     get_bookings_for_ship,
     get_bookings_for_service,
-    cancel_booking
+    cancel_booking,
+    get_all_bookings
 )
 
 blp = Blueprint("Bookings", "bookings", url_prefix="/bookings", description="Operations related to bookings")
 
+# Route to list all bookings (could be for any ship or service)
 @blp.route("/")
 class BookingList(MethodView):
-    @blp.response(200, description="List of all bookings for a ship or service")
+    @blp.response(200, BookingSchema(many=True), description="List of all bookings")
     def get(self):
         """
         Retrieve all bookings for a ship or service.
         """
-        # This could be further modified if you need to differentiate between bookings for ships or services.
-        return {"message": "This route could be split further if needed for ships/services"}
+        bookings = get_all_bookings() 
+        return bookings, 200
 
-    @blp.arguments(schema=None)  # Replace with proper schema if used
-    @blp.response(201, description="Booking created successfully")
-    @blp.response(400, description="Invalid data provided")
-    def post(self):
+    @blp.arguments(BookingSchema)
+    @blp.response(201, BookingSchema, description="Booking created successfully")
+    def post(self, data):
         """
-        Create a new booking for a ship or service.
+        Create a new booking.
         """
-        data = request.get_json()
-        ship_id = data.get('ship_id')
-        service_id = data.get('service_id')
-        user_id = data.get('user_id')
-        date_time = data.get('date_time')
-
-        if not ship_id or not service_id or not user_id or not date_time:
-            return {"error": "Missing required fields"}, 400
-
-        booking = create_booking(ship_id, service_id, user_id, date_time)
-        return {"message": "Booking created successfully", "booking": booking.to_dict()}, 201
+        try:
+            booking = create_booking(data)  # Pass data to create a booking
+            return booking, 201
+        except Exception as e:
+            return jsonify({"message": f"An unexpected error occurred: {str(e)}"}), 500
 
 
+# Route for bookings related to a specific ship
 @blp.route("/ship/<int:ship_id>")
 class BookingsForShip(MethodView):
-    @blp.response(200, description="List of all bookings for a specific ship")
+    @blp.response(200, BookingSchema(many=True), description="List of all bookings for a specific ship")
     def get(self, ship_id):
         """
         Retrieve all bookings for a specific ship.
         """
         bookings = get_bookings_for_ship(ship_id)
-        return [booking.to_dict() for booking in bookings], 200
+        return bookings, 200
 
 
+# Route for bookings related to a specific service
 @blp.route("/service/<int:service_id>")
 class BookingsForService(MethodView):
-    @blp.response(200, description="List of all bookings for a specific service")
+    @blp.response(200, BookingSchema(many=True), description="List of all bookings for a specific service")
     def get(self, service_id):
         """
         Retrieve all bookings for a specific service.
         """
         bookings = get_bookings_for_service(service_id)
-        return [booking.to_dict() for booking in bookings], 200
+        return bookings, 200
 
 
+# Route to cancel a specific booking
 @blp.route("/<int:booking_id>")
 class BookingDetail(MethodView):
     @blp.response(200, description="Booking canceled successfully")
