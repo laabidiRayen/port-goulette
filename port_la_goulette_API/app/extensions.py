@@ -2,17 +2,16 @@
 #Purpose:
 #Configure and initialize extensions like SQLAlchemy, JWT, or others.
 
-# from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
-
-# db = SQLAlchemy()
-# migrate = Migrate()
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_smorest import Api
 
+
+from flask_mail import Mail
+
 # Initialize Flask extensions
 db = SQLAlchemy()
 migrate = Migrate()
 api = Api()
+mail = Mail()

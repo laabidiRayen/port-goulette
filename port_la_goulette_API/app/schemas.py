@@ -123,3 +123,8 @@ class ScheduleSchema(Schema):
     ship_id = fields.Int(required=True)
     departure_time = fields.DateTime(required=True)
     arrival_time = fields.DateTime(required=True)
+
+class ScheduleUpdateSchema(Schema):
+    arrival_time = fields.DateTime(required=True)
+    departure_time = fields.DateTime(required=True)
+    ship_id = fields.Integer()

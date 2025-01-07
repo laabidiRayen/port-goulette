@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port La Goulette Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="hero">
+        <header>
+            <div class="container">
+                <h1>Welcome to Port La Goulette</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#booking">Booking</a></li>
+                        <li><a href="#schedules">Schedules</a></li>
+                        <li><a href="#map">Interactive Map</a></li>
+                        <li><a href="#profile">Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="hero-content">
+            <h2>Discover Excellence in Maritime Services</h2>
+            <p>Connecting trade and tourism through world-class facilities.</p>
+            <a href="#services" class="hero-button">Explore Our Services</a>
+        </div>
+    </div>
+
+    <section id="about" class="fade-in">
+        <div class="container">
+            <h2>About Port La Goulette</h2>
+            <p>Port La Goulette is a premier maritime hub known for its modern facilities and excellent services. It serves as a key connection point for trade and tourism in the region.</p>
+            <img src="port.jpg" alt="Port La Goulette">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="fade-in">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <img src="cargo.jpg" alt="Cargo Services">
+                    <h3>Cargo Handling</h3>
+                    <p>Efficient and secure cargo management for all your needs.</p>
+                </div>
+                <div class="service-item">
+                    <img src="passenger.jpg" alt="Passenger Services">
+                    <h3>Passenger Services</h3>
+                    <p>Comfortable and seamless travel experiences for passengers.</p>
+                </div>
+                <div class="service-item">
+                    <img src="customs.jpg" alt="Customs Assistance">
+                    <h3>Customs Assistance</h3>
+                    <p>Hassle-free customs processes to save your time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="fade-in">
+        <div class="container">
+            <h2>Booking</h2>
+                <p>Book your services or slots at the port with ease.</p>
+                <form>
+                    <label for="service">Service Type:</label>
+                    <select id="service" name="service">
+                        <option value="cargo">Cargo</option>
+                        <option value="passenger">Passenger</option>
+                    </select>
+                    <label for="date">Booking Date:</label>
+                    <input type="date" id="date" name="date" required>
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </section>
+    
+    <!-- Schedules Section -->
+    <section id="schedules" class="fade-in">
+        <div class="container">
+            <h2>Schedules</h2>
+            <p>Check the latest schedules for arrivals and departures.</p>
+            <button>View Schedules</button>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section id="map" class="fade-in">
+        <div class="container">
+            <h2>Interactive Map</h2>
+            <p>Explore the port and its facilities using the interactive map below.</p>
+            <div class="map-placeholder">Map Placeholder</div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Port La Goulette. All rights reserved.</p>
+            <p>Contact Us: <a href="mailto:info@portlagoulette.com">info@portlagoulette.com</a> | Phone: +216-123-456-789</p>
+            <p>Follow Us: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

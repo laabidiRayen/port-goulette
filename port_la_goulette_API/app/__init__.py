@@ -1,39 +1,9 @@
-# from flask import Flask
-# from flask_sqlalchemy import SQLAlchemy
-# from app.routes import booking_route, schedule_route, user_route
-# from flask_jwt_extended import JWTManager
-# from flask_mail import Mail
-# from flask_cors import CORS
-
-# db = SQLAlchemy()
-# jwt = JWTManager()
-# mail = Mail()
-
-# def create_app():
-#     app = Flask(__name__)
-    
-#     # Configuration
-#     app.config.from_object('app.config.Config')
-    
-#     # Initialize extensions
-#     db.init_app(app)
-#     jwt.init_app(app)
-#     mail.init_app(app)
-#     CORS(app)
-    
-#     # Register routes
-#     from app.routes import feedback
-#     app.register_blueprint(user_route.bp)
-#     app.register_blueprint(schedule_route.bp)
-#     app.register_blueprint(booking_route.bp)
-#     app.register_blueprint(feedback.bp)
-    
-#     return app
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from app.extensions import db,migrate
+from app.extensions import db,migrate,mail
 from flask_migrate import Migrate
 from .config import Config  # Configuration settings (create this file if not exists)
+
 
 # Create a function to initialize the Flask app
 def create_app():
@@ -46,6 +16,7 @@ def create_app():
     # Initialize the extensions with the app
     db.init_app(app)
     migrate.init_app(app, db)
+    mail.init_app(app)
 
     # Register blueprints (routes)
     from app.ressources.user_route import blp as user_blp
