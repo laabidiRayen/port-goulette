@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from app.extensions import db,migrate,mail
+from app.extensions import db,migrate,mail,jwt
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 from .config import Config  # Configuration settings (create this file if not exists)
 
 
@@ -17,6 +18,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
+    jwt.init_app(app)
 
     # Register blueprints (routes)
     from app.ressources.user_route import blp as user_blp

@@ -23,3 +23,17 @@ class Config:
     MAIL_USERNAME = 'abidi.rayen22@gmail.com'  # Replace with your email
     MAIL_PASSWORD = 'egec cqgw vfdc pfpw'  # Replace with your email password
     MAIL_DEFAULT_SENDER = 'abidi.rayen22@gmail.com'  # Replace with your email
+
+    # JWT Configuration
+    JWT_SECRET_KEY = '123675312681271827838612'
+
+    # Security Scheme for JWT
+    OPENAPI_COMPONENTS = {
+        "securitySchemes": {
+            'jsonWebToken': {
+                'type': 'apiKey',
+                'in': 'header',
+                'name':'Authorization'}
+            }
+        }
+    OPENAPI_SECURITY = [{"jsonWebToken": []}]

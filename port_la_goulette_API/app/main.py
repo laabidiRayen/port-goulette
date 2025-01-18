@@ -1,5 +1,5 @@
 from flask import Flask
-from extensions import db, migrate, api
+from extensions import db, migrate, api, mail, jwt
 from ressources.user_route import blp as user_blp
 from ressources.schedule_route import blp as schedule_blp
 from ressources.booking_route import blp as booking_blp
@@ -31,6 +31,8 @@ def create_app():
     # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
+    mail.init_app(app)
+    jwt.init_app(app)
 
     return app
 

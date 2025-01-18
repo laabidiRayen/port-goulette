@@ -50,7 +50,7 @@ class ScheduleDetail(MethodView):
         """
         schedule = get_schedule_by_id(schedule_id)
         if schedule:
-            return schedule, 200
+            return ScheduleSchema().dump(schedule), 200
         return {"error": "Schedule not found"}, 404
     @blp.arguments(ScheduleUpdateSchema)
     @blp.response(200, description="Schedule updated successfully")

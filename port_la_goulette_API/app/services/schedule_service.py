@@ -72,8 +72,15 @@ def update_schedule(schedule_id, arrival_time, departure_time, ship_id=None):
             for booking in bookings:
                 user_emails.add(booking.user.email)
 
+        # Debugging: Print user_emails
+        print(f"user_emails: {user_emails}")
+        print(f"type of user_emails: {type(user_emails)}")
+        # Ensure changes is a string
+        if not isinstance(changes, str):
+            changes = str(changes)
         # Send notification emails
         for email in user_emails:
+            print(f"Sending email to: {email}")
             send_email(email, "Schedule Updated", changes)
     
 
