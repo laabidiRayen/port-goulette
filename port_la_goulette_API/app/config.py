@@ -20,9 +20,9 @@ class Config:
     MAIL_PORT = 587  # Usually 587 for TLS
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
-    MAIL_USERNAME = 'abidi.rayen22@gmail.com'  # Replace with your email
-    MAIL_PASSWORD = 'egec cqgw vfdc pfpw'  # Replace with your email password
-    MAIL_DEFAULT_SENDER = 'abidi.rayen22@gmail.com'  # Replace with your email
+    MAIL_USERNAME = 'user.user@gmail.com'  # Replace with your email
+    MAIL_PASSWORD = 'iufha aodijz doaizj apodj'  # Replace with your email password
+    MAIL_DEFAULT_SENDER = 'zafdhdadad@gmail.com'  # Replace with your email
 
     # JWT Configuration
     JWT_SECRET_KEY = '123675312681271827838612'
